@@ -1,3 +1,3 @@
 # getLinks!
 
-## Приложение для браузера Google Chrome
+Приложение для браузера Google Chrome
