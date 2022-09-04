@@ -1,0 +1,52 @@
+{
+    "manifest_version": 3,
+    "name": "GetLinks!",
+    "version": "1.0",
+    "description": "Выделив нужные элементы на сайте, получаем возможность скопировать ссылки и их названия в буфер обмена.",
+    "icons": {
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
+    },
+
+    "action": {
+        "default_title": "GetLinks! - cсылки здесь",
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+
+    },
+
+
+    "content_scripts": [
+        {
+            "matches": [ "<all_urls>" ],
+            "js": [ "newMain.js" ],
+            "css": [ "newStyle.css" ]
+        }
+    ],
+
+    "host_permissions": [
+        "http://*/*",
+        "https://*/*"
+    ],
+
+    "optional_host_permissions": [
+        "*://*/*"
+    ],
+
+    "permissions": [
+        "tabs",
+        "storage",
+        "activeTab",
+        "scripting"
+
+    ]
+}
+
+
+
+
+
+
+
+

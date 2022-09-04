@@ -1,0 +1,498 @@
+
+body{
+    position: relative; !important;
+    overflow: auto; !important;
+}
+input[type=checkbox].inputAddLink,
+input[type=checkbox].inputSaveData,
+input[type=checkbox].inputAppClose{
+    margin: 3px 10px 3px 0;  !important;
+}
+body.myBody{
+    font-family: monospace; !important;
+    margin: 0; !important;
+}
+
+::selection{
+    background-color: mediumslateblue; !important;
+    color: white; !important;
+}
+
+
+.popupLink{
+    width: 350px;
+    min-width: 350px;
+    min-height: 115px;
+    border: 1px solid #FF00FF;
+    border-top: none;
+    padding: 0;
+    z-index: 1000000000000;
+    top: 0;
+    right: 0;
+    display: none;
+    position: fixed;
+    font-size: 16px;
+    box-sizing: border-box;
+    background: rgb(3, 19, 33);
+    font-family: monospace;
+
+}
+
+.popupLink.activeShow{
+    display: block;
+}
+
+
+.tabsHead,
+.tabsBody{
+    width: 100%;
+}
+
+
+.tabsBody__content{
+    height: 470px;
+    min-height: 115px;
+    position: relative;
+    width: 100%;
+
+}
+
+.tabsBody__content{
+    display: none;
+}
+
+.tabsBody__content.is-active{
+    display: block;
+    box-shadow: inset 0 -3px 68px -39px #ff00ff;
+}
+
+.tabsHead{
+    display: flex;
+    cursor: pointer;
+    max-width: 350px;
+    margin-left: auto;
+
+}
+
+.tabsHead__title{
+    width: 50%;
+    text-align: center;
+    padding: 10px 6px 8px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    box-shadow: inset 2px -1px 11px 6px #031321;
+    color: black;
+    z-index: 1;
+    background: #6495ED;
+
+}
+
+
+.tabsHead__title.is-active{
+    background: #00BFFF;
+    box-shadow: 8px 0 25px #2196f3, 0 0 58px #2196f3, 0 0 98px #2196f3, inset 2px -1px 11px 5px #031321;
+    color: #fff;
+    text-shadow:
+            0 0 7px #fff,
+            0 0 10px #fff,
+            0 0 21px #fff;
+}
+
+.tabsBody__content_first{
+    color: #2196f3;
+    font-family: monospace;
+    font-size: 16px;
+    background: linear-gradient(#031321, mediumslateblue);
+
+}
+.tabsBody__content_last{
+    background: #031321;
+    letter-spacing: 1px;
+    font-size: 12px;
+}
+
+
+.copyBtns{
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #031321;
+    max-width: 350px;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    padding: 4px 0;
+}
+
+
+button.btnCopyLinks,
+button.btnSave,
+button.btnCopyText{
+    box-shadow: 0 0 10px #ff00ff, 0 0 40px #ff00ff, 0 0 80px #ff00ff;
+    font-size: 13px;
+    background: #ff00ff;
+}
+
+button.btnCopyLinks:hover,
+button.btnCopyText:hover,
+button.btnSave:hover{
+    color: #031321;
+}
+
+button.btnCopyLinks:active,
+button.btnCopyText:active,
+button.btnSave:active{
+    box-shadow: none;
+    background: #cd00cd;
+}
+
+
+.wrapBtnSave button.btnSave,
+.copyBtns button.btnCopyLinks,
+.copyBtns button.btnCopyText{
+    color: white;
+    margin: 0;
+    border-radius: 2px;
+    font-family: monospace;
+    padding: 4px 8px;
+    border: none;
+    font-size: 13px;
+    cursor: pointer;
+
+}
+
+.wrapSettings{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.contentSettings{
+    height: 45%;
+    padding: 10px;
+    color: powderblue;
+}
+
+
+.wrapInputKeys{
+    margin: 25px 3px 35px 3px;
+}
+
+label.labelKeys{
+    display: block;
+    margin: 0 0 13px 0;
+    padding: 0;
+    font-size: 14px;
+}
+label.labelAddLink,
+label.labelSaveData,
+label.labelAppClose{
+    display: inline-block;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    padding: 0;
+    font-size: 13px;
+}
+
+input.inputKeys{
+    width: 80%;
+    height: 25px;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+    font-family: monospace;
+    box-sizing: border-box;
+}
+
+.garbage{
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+img.garbageImg{
+    width: 40px;
+    height: 40px;
+    padding: 3px;
+    background: #00BFFF;
+    border-radius: 50%;
+    box-sizing: border-box;
+}
+
+button.buttonDelite,
+button.btnOpen{
+    height: 40px;
+    margin: 10px 0 10px 5px;
+    background: none;
+    cursor: pointer;
+    border: 1px solid #91C9FF;
+    color: white;
+    font-size: 14px;
+    letter-spacing: 3px;
+}
+button.btnOpen{
+    letter-spacing: 1px;
+}
+
+button.buttonDelite{
+    padding: 1px 6px;
+}
+
+
+button.buttonDelite:hover,
+button.btnOpen:hover{
+    border: 1px solid rgb(255, 0, 255);
+    color: white;
+
+}
+
+button.buttonDelite:active,
+button.btnOpen:active{
+    border: 2px solid rgb(255, 0, 255);
+    padding: 2px;
+    margin-left: 10px;
+
+}
+
+.closeAppDiv{
+    margin-bottom: 30px;
+}
+
+.wrapBtnSave{
+    padding: 12px;
+}
+
+.wrapContentTable{
+    height: 100%;
+    overflow: auto;
+    overflow-x: hidden;
+    width: 100%;
+}
+
+
+table.contentTable{
+    color: powderblue;
+    padding-top: 10px;
+    border: none;
+    display: block;
+    width: 99.5%;
+    margin-left: auto;
+    margin-bottom: 40px;
+    font-family: monospace;
+    font-size: 16px;
+}
+
+tr.trTable{
+    display: flex;
+    cursor: copy;
+    min-width: 332px;
+    width: 100%;
+    margin: 0;
+    border: none;
+    padding:0;
+}
+
+
+td.tdTable{
+    padding: 0 0 2px 0;
+    text-overflow: ellipsis;
+    text-align: left;
+    width: 46%;
+    overflow: hidden;
+    white-space: nowrap;
+    margin-left: 4px;
+    border: none;
+
+}
+
+td.tdTable:not(:last-child){
+    border-right: 2px solid rgb(71, 69, 69);
+}
+
+td.tdTable:first-child{
+    width: 7%;
+    max-width: 70px;
+    text-align: center;
+    margin-left: 0;
+}
+
+
+
+.stripPullLeft{
+    height: 100%;
+    width: 2px;
+    background: transparent;
+    cursor: ew-resize;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1000000;
+}
+
+
+/* переключатель */
+.switchBtn{
+    display: inline-block;
+    width: 72px;
+    height: 38px;
+    border-radius: 19px;
+    /*background: linear-gradient(to right, #7f7f7f 0, #bfbfbf 40%, #91C9FF 60%, #483D8B 100%);*/
+    background: linear-gradient(to right, #483D8B 0, #91C9FF 40%, #B0C4DE 60%, lightslategrey 100%);
+    background-size: 180px 100%;
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+    border: none;
+    cursor: pointer;
+    position: relative;
+    transition-duration: 300ms;
+}
+.switchBtn::after {
+    content: "";
+    height: 32px;
+    width: 32px;
+    border-radius: 17px;
+    background: #fff;
+    top: 3px;
+    left: 3px;
+    transition-duration: 300ms;
+    position: absolute;
+    z-index: 1;
+}
+
+
+.switchBtn.switchOn{
+    background-position-x: -100px;
+}
+
+.switchOn::after {
+    left: 37px;
+}
+
+
+
+/* стили светлой темы */
+.popupLink.lightTheme{
+    background: azure;
+    border: 2px solid #708090;
+}
+.popupLink.lightTheme .wrapContentTable{
+    background: linear-gradient(azure, #B0C4DE);
+}
+.popupLink.lightTheme table.contentTable{
+    color: darkslategrey;
+}
+.popupLink.lightTheme .wrapSettings{
+    background: linear-gradient(azure, #B0C4DE);
+}
+.popupLink.lightTheme .contentSettings{
+    color: darkslategrey;
+}
+
+.popupLink.lightTheme .tabsHead__title{
+    box-shadow: none;
+    background: lightblue;
+    border-radius: 12px;
+    color: rgb(255, 255, 255);
+}
+.popupLink.lightTheme .tabsHead__title.is-active {
+    background: lightslategrey;
+}
+
+.popupLink.lightTheme button.btnCopyLinks,
+.popupLink.lightTheme button.btnCopyText,
+.popupLink.lightTheme button.btnSave{
+    box-shadow: none;
+    border-radius: 9px;
+    background: aliceblue;
+    color: lightslategrey;
+}
+.popupLink.lightTheme button.btnCopyLinks:hover,
+.popupLink.lightTheme button.btnCopyText:hover,
+.popupLink.lightTheme button.btnSave:hover{
+    color: rgb(71, 69, 69);
+}
+.popupLink.lightTheme button.btnCopyLinks:active,
+.popupLink.lightTheme button.btnCopyText:active,
+.popupLink.lightTheme button.btnSave:active{
+    box-shadow: 0 0 10px whitesmoke;
+}
+
+.popupLink.lightTheme .copyBtns{
+    background: transparent;
+}
+
+.popupLink.lightTheme button.buttonDelite{
+    border-radius: 8px;
+    border-color: slategray;
+    color: rgb(71, 69, 69);
+    background-image: -webkit-linear-gradient(45deg, slategray 50%, transparent 50%);
+    background-image: linear-gradient(45deg, slategray 50%, transparent 50%);
+    background-position: 100%;
+    background-size: 400%;
+    -webkit-transition: background 300ms ease-in-out;
+    transition: background 300ms ease-in-out;
+}
+.popupLink.lightTheme button.buttonDelite:hover{
+    background-position: 0;
+    color: #fff;
+}
+.popupLink.lightTheme button.buttonDelite:active{
+    padding: 0;
+}
+.popupLink.lightTheme img.garbageImg{
+    background: lightblue;
+    border: 1px solid rgb(71, 69, 69);
+}
+
+
+/* попап */
+.maybe{
+    width: 217px;
+    background: linear-gradient(rgb(3, 19, 33), mediumslateblue);
+    border: 1px solid #91C9FF;
+    /*background: rgb(3, 19, 33);*/
+    color: white;
+    padding: 6px;
+}
+
+.maybe .maybe__text,
+.maybe .maybe__title{
+    font-size: 19px;
+    letter-spacing: 3px;
+}
+
+.maybe .maybe__text{
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+
+
+
+/*попап копирования*/
+
+.copyingPopup{
+    background: powderblue;
+    position: absolute;
+    bottom: -70px;
+    /*right: 30px;*/
+
+    /*right: 50%;*/
+    /*margin: auto;*/
+    height: 50px;
+    /*margin-right: -60px;*/
+    display: flex;
+    align-items: center;
+    /*width: 120px;*/
+    justify-content: center;
+    width: 350px;
+    right: 0;
+    color: darkslategrey;
+    /*color: rgb(255, 255, 255);*/
+    font-family: monospace;
+
+}
+
