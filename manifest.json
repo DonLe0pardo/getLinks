@@ -38,7 +38,8 @@
         "tabs",
         "storage",
         "activeTab",
-        "scripting"
+        "scripting",
+        "unlimitedStorage"
 
     ]
 }

@@ -1,21 +1,22 @@
 
 body{
-    position: relative; !important;
-    overflow: auto; !important;
+    position: relative !important;
+    overflow: auto !important;
 }
+
 input[type=checkbox].inputAddLink,
 input[type=checkbox].inputSaveData,
 input[type=checkbox].inputAppClose{
-    margin: 3px 10px 3px 0;  !important;
+    margin: 3px 10px 3px 0 !important;
 }
 body.myBody{
-    font-family: monospace; !important;
-    margin: 0; !important;
+    font-family: monospace !important;
+    margin: 0 !important;
 }
 
 ::selection{
-    background-color: mediumslateblue; !important;
-    color: white; !important;
+    background-color: mediumslateblue !important;
+    color: white !important;
 }
 
 
@@ -135,11 +136,7 @@ button.btnCopyText{
     background: #ff00ff;
 }
 
-button.btnCopyLinks:hover,
-button.btnCopyText:hover,
-button.btnSave:hover{
-    color: #031321;
-}
+
 
 button.btnCopyLinks:active,
 button.btnCopyText:active,
@@ -161,6 +158,12 @@ button.btnSave:active{
     font-size: 13px;
     cursor: pointer;
 
+}
+
+button.btnCopyLinks:hover,
+button.btnCopyText:hover,
+button.btnSave:hover{
+    color: #031321;
 }
 
 .wrapSettings{
@@ -320,6 +323,11 @@ td.tdTable:first-child{
 }
 
 
+td.tdTable.textBlueColor{
+    color: #2196f3;
+}
+
+
 
 .stripPullLeft{
     height: 100%;
@@ -448,6 +456,11 @@ td.tdTable:first-child{
     border: 1px solid rgb(71, 69, 69);
 }
 
+.popupLink.lightTheme .copyingPopup{
+    background: powderblue;
+    color: darkslategrey;
+}
+
 
 /* попап */
 .maybe{
@@ -475,24 +488,27 @@ td.tdTable:first-child{
 /*попап копирования*/
 
 .copyingPopup{
-    background: powderblue;
+    background: rgb(3, 19, 33);
+    color: powderblue;
     position: absolute;
     bottom: -70px;
-    /*right: 30px;*/
-
-    /*right: 50%;*/
-    /*margin: auto;*/
     height: 50px;
-    /*margin-right: -60px;*/
     display: flex;
     align-items: center;
-    /*width: 120px;*/
     justify-content: center;
     width: 350px;
     right: 0;
-    color: darkslategrey;
-    /*color: rgb(255, 255, 255);*/
     font-family: monospace;
 
+}
+
+
+.popupLink .closeAppBtn{
+    position: absolute;
+    font-size: 40px;
+    left: -37px;
+    cursor: pointer;
+    z-index: 3;
+    top: -8px;
 }
 
