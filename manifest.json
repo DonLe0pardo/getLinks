@@ -8,6 +8,7 @@
         "48": "icon.png",
         "128": "icon.png"
     },
+    
 
     "action": {
         "default_title": "GetLinks! - cсылки здесь",
@@ -28,6 +29,7 @@
     "host_permissions": [
         "http://*/*",
         "https://*/*"
+        
     ],
 
     "optional_host_permissions": [
@@ -39,7 +41,8 @@
         "storage",
         "activeTab",
         "scripting",
-        "unlimitedStorage"
+        "unlimitedStorage",
+        "management"
 
     ]
 }

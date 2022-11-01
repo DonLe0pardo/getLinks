@@ -1,8 +1,8 @@
-
 let body = document.querySelector('body');
 // Попап
-let popupLink;
+let linkPopup;
 let isExtensionActive = false;
+
 // табы
 let tabsHead;
 // табы контент
@@ -46,15 +46,14 @@ let newPopupWidth = 0;
 let btnOpen = document.querySelector('.btnOpen');
 
 
-
 // попап
-popupLink = document.createElement('div');
-popupLink.className='popupLink';
-body.append(popupLink);
+linkPopup = document.createElement('div');
+linkPopup.className='linkPopup';
+body.append(linkPopup);
 
 tabsHead = document.createElement('div');
 tabsHead.className='tabsHead';
-popupLink.prepend(tabsHead);
+linkPopup.prepend(tabsHead);
 
 
 // buil tabs - head
@@ -73,7 +72,7 @@ tabsHead.append(lastTabs);
 
 tabsBody = document.createElement('div');
 tabsBody.className='tabsBody';
-popupLink.append(tabsBody);
+linkPopup.append(tabsBody);
 
 let firstTabsContent = document.createElement('div');
 firstTabsContent.className='tabsBody__content tabsBody__content_first is-active';
@@ -106,14 +105,14 @@ wrapContentTable.append(contentTable);
 //полоса тянуть табл влево
 let stripPullLeft = document.createElement('div');
 stripPullLeft.className='stripPullLeft';
-popupLink.prepend(stripPullLeft);
+linkPopup.prepend(stripPullLeft);
 
 // тест
 let closeAppBtn = document.createElement('div');
 closeAppBtn.className='closeAppBtn';
 closeAppBtn.setAttribute('title', 'Закрыть');
 closeAppBtn.innerHTML = '&#10006'
-popupLink.prepend(closeAppBtn);
+linkPopup.prepend(closeAppBtn);
 
 
 
@@ -254,8 +253,6 @@ switchBtn.setAttribute('title', 'Переключить тему приложе�
 contentSettings.append(switchBtn);
 
 
-
-
 // ВЫЗОВ ПРИЛОЖЕНИЯ****
 
 // получение данных из стор
@@ -268,18 +265,23 @@ function getData(cb = () => {}) {
         if (resultWidth.widthPopup !== undefined){
              let savedPopupWidth = JSON.stringify(resultWidth.widthPopup);
             // let savedPopupWidth = resultWidth.widthPopup;
-            popupLink.style.width = savedPopupWidth + "px";
+            linkPopup.style.width = savedPopupWidth + "px";
      
         }
     });
+    // chrome.storage.sync.get(['statusApp'], function(resultT){
+    //     isExtensionActive = resultT.statusApp;
+    // });
+    // sessionStorage.getItem('statusApp');
+    // alert(sessionStorage.getItem('statusApp'))
 }
+
+
 
 
 getData((data) => {
     renderResult(data);
 });
-
-
 
 
 
@@ -290,82 +292,125 @@ function openApp(){
 }
 
 
-document.addEventListener('keydown', function(event){
 
-    if (event.ctrlKey && event.code === 'KeyQ' && event.key === 'q' && !btnOpen){  // только на отображение
-        if(!isExtensionActive){
-            isExtensionActive = true;
-            openApp();
-        } else {
-            isExtensionActive = false;
-            closeApp();
+// этот метод работает только для анг расскладки
+// document.addEventListener('keydown', function(event){
+
+//     if (event.ctrlKey && event.code === 'KeyQ' && event.key === 'q' && !btnOpen){  // только на отображение
+//         if(!isExtensionActive){
+//             isExtensionActive = true;
+//             openApp();
+//         } else {
+//             isExtensionActive = false;
+//             closeApp();
+//         }
+
+//     }
+// });
+
+
+
+// работает для расскладок на русском и анг. яз.
+function runOnKeys(func, ...codes) {
+    let pressed = new Set();
+
+    document.addEventListener('keydown', function(event) {
+        pressed.add(event.code);
+        
+        for (let code of codes) {
+            if (!pressed.has(code)) {
+            return;
+            }
         }
+        pressed.clear();
 
-    }
-});
+        func();
+        
+    });
 
+    document.addEventListener('keyup', function(event) {
+        pressed.delete(event.code);
+        
+    });
+
+    
+}
+
+
+if (!btnOpen) {
+    runOnKeys(
+        () => keyboardToggle(),
+        "ControlLeft",
+        "KeyQ"
+    );
+}
+
+
+
+
+
+function keyboardToggle(){
+    
+    if(!isExtensionActive){
+        isExtensionActive = true;
+        openApp();
+
+    } else {
+        isExtensionActive = false;
+        closeApp();
+    }   
+}
+    
+  
 
 
 
 /////////////////////////////////////
-
-
-// let maybe = document.querySelector('.maybe');
-
-function callAppByButton() {
-
+// function callAppByButton() {
+ 
     if (btnOpen) {
         
         btnOpen.addEventListener('click', async () => {
-    
+
             await chrome.tabs.query({active: true, currentWindow: true}, function (tabs) {
                 
-                    if (!isExtensionActive){
-                        isExtensionActive = true;
-                      
-                        chrome.scripting.executeScript({
-                            target: {
-                                tabId: tabs[0].id,
-                            },
-                                func: openApp,    
-                        })
-                        
-                        
-                    }
-                    //  else {
-                        
-                        
-                    //     isExtensionActive = false;
-                        
-                    //     chrome.scripting.executeScript({
-                    //         target: {
-                    //             tabId: tabs[0].id,
-                    //         },
-                    //         func: closeApp,  
-                    //     })   
-                        
-                    // }
-
+                if (!isExtensionActive){
+                    isExtensionActive = true;
+                    chrome.scripting.executeScript({
+                        target: {
+                            tabId: tabs[0].id,
+                        },
+                            func: openApp,    
+                    })
                     
+                         
+                } 
+                // else {
+
+                //         isExtensionActive = false;
+                //         chrome.scripting.executeScript({
+                //             target: {
+                //                 tabId: tabs[0].id,
+                //             },
+                //             func: closeApp,  
+                //         })
+                // } 
             });
+            
             window.close();
-            // setTimeout(window.close, 1500);
+            
         })
-        
-    }
-    
-}
-callAppByButton();
+          
+    }  
+// }
+// callAppByButton();
 
 
-closeAppBtn.addEventListener('click', async () => {
+
+closeAppBtn.addEventListener('click', () => {
     isExtensionActive = false;
     closeApp();
 })
-
-
-
-
 
 
 // если пользователь покидает страницу, то закрывать приложение
@@ -378,10 +423,12 @@ window.onblur = function() {
 
 
 
+
+
 // ОТКЛЮЧЕНИЕ ВЫДЕЛЕНИЯ ЗОНЫ МЫШЬЮ****
 function closeApp(){
     isExtensionActive = false;
-    popupLink.classList.remove('activeShow');
+    linkPopup.classList.remove('activeShow');
     selectAreaEl.remove();
     document.addEventListener("mousedown", () => {
     });
@@ -391,7 +438,7 @@ function closeApp(){
 
 
 // Переключение вкладок
-document.querySelectorAll('.popupLink').forEach(function (tabEl) {
+document.querySelectorAll('.linkPopup').forEach(function (tabEl) {
 
     let tabsHead = tabEl.querySelector('.tabsHead');
     let tabHeadList = tabEl.querySelectorAll('.tabsHead__title');
@@ -399,7 +446,9 @@ document.querySelectorAll('.popupLink').forEach(function (tabEl) {
 
     tabHeadList.forEach((tabHeadListEl, indexHead) =>{
         tabsHead.addEventListener('click', (e)=>{
+    
             tabHeadList[indexHead].classList.remove('is-active');
+            
             if (tabHeadList[indexHead] === e.target) {
                 tabHeadList[indexHead].classList.add('is-active');
 
@@ -415,21 +464,26 @@ document.querySelectorAll('.popupLink').forEach(function (tabEl) {
     })
 })
 
+
 // остановить скролл страницы
 function toggleScroll(){
     let widthScrollBar = window.innerWidth - document.documentElement.clientWidth;
-//если курсор находится над popupom
-    popupLink.addEventListener("mouseover", () => {
+    if (widthScrollBar === 0) {
+        widthScrollBar = 17;
+    }
+
+    //если курсор находится над popupom
+    linkPopup.addEventListener("mouseover", () => {
         
-        document.body.style.marginRight = widthScrollBar + 'px';
+        document.body.style.setProperty('marginRight', widthScrollBar + 'px', 'important');
         document.body.style.setProperty('overflow', 'hidden', 'important');
         document.documentElement.style.setProperty('overflow', 'initial', 'important');
-        popupLink.style.right = widthScrollBar + 'px';
+        linkPopup.style.setProperty('right', widthScrollBar + 'px', 'important');
     })
 
-//если курсор ушел с popup
-    popupLink.addEventListener('mouseout', () => {
-        popupLink.style.right = '0';
+    //если курсор ушел с popup
+    linkPopup.addEventListener('mouseout', () => {
+        linkPopup.style.right = '0';
         document.body.style.overflow = '';
         document.body.style.marginRight = '0';
         document.documentElement.style.overflow = '';
@@ -447,13 +501,12 @@ let selectAreaEl = document.createElement('div');
 
 function areaSelection() {
 
-    popupLink.classList.add('activeShow');
+    linkPopup.classList.add('activeShow');
     document.body.append(selectAreaEl);
     selectAreaEl.style.position = "absolute";
     selectAreaEl.style.background = "blue";
     selectAreaEl.style.opacity = "0.2";
     selectAreaEl.style.zIndex = "1000000000";
-
 
     let selectAreaEnable = false;
     let selectAreaActivator = false;
@@ -466,13 +519,10 @@ function areaSelection() {
 
     let x1, x2, y1, y2;
 
-
-
     //кн. нажата
     document.addEventListener("mousedown", (e) => {
 
         if (!isExtensionActive || e.target === stripPullLeft) return
-
 
         e.preventDefault();
 
@@ -481,7 +531,6 @@ function areaSelection() {
 
         selectAreaTop = e.pageY; //вниз
         selectAreaLeft = e.pageX;  // вправо
-
 
     }, false);
 
@@ -493,18 +542,16 @@ function areaSelection() {
 
         selectAreaEnable = false;
 
-        
         if (selectAreaActivator){
             getTags();
         }
 
-
-
     }, false);
 
-    popupLink.addEventListener("mouseup", (e) => {
+    linkPopup.addEventListener("mouseup", (e) => {
         selectAreaActivator = false;
     }, false);
+
 
     // перемещение мыши
     document.addEventListener("mousemove", (e) => {
@@ -550,14 +597,12 @@ function areaSelection() {
     let result = [];
     linksList = '';
     textList = '';
-   
-
-
+    
 
     function getTags() {
 
-        navigator.clipboard.writeText('');
-
+        getElem = [];
+       
         contentTable.innerHTML = '';
 
         let tags = [...document.querySelectorAll("a")];
@@ -578,7 +623,6 @@ function areaSelection() {
             let ely2 = ely1 + tagEl.clientHeight;
             let elx2 = elx1 + tagEl.clientWidth;
 
-
             let exclude = false;
 
             // проверка по y координате
@@ -588,12 +632,18 @@ function areaSelection() {
             if (!(x2 >= elx1 && elx1 >= x1 && x2 >= elx2 && elx2 >= x1)) exclude = true;
 
 
-
             if (!exclude && tagEl.getAttribute('href')) {
 
+
+                // let url = tagEl.getAttribute('href').replace('https://', '').replace('http://', '').replace(hostName, '');
                 let url = tagEl.getAttribute('href');
                 // url = url.replace("https://", '');
                 // url = url.replace("http://", '');
+                // url = url.replace(hostName, '');
+               
+                if (!(url.match(/(http)+/g))){
+                    url = location.protocol + '//' + location.hostname + tagEl.getAttribute('href');
+                }
 
                 let text = tagEl.innerText;
                 let isDouble = false;
@@ -609,19 +659,22 @@ function areaSelection() {
 
                 // только уникальные проверка на флаг включен
                 if (inputAddLink.checked) {
-                    // let isDouble = false;
+        
                     // покрасить полученное
                     tagEl.style.background = 'rgb(100, 149, 237)';
                     document.addEventListener('mouseup', ()=>{
                         tagEl.style.background = '';
                     })
                     isDouble = result.find(object => object.url === url);
-                    // if(!(result.find(object => object.url === url))){
+                    
 
                     if (!isDouble) {
+                        
                         result.push({
-                            // url: tagEl.getAttribute('href').replace('https://', '').replace('http://', ''),
-                            url: tagEl.getAttribute('href'),
+                            // url: tagEl.getAttribute('href').replace('https://', '').replace('http://', '').replace(hostName, ''),
+                            // url: tagEl.getAttribute('href'),
+                            // url: location.protocol + '//' + location.hostname + url,
+                            url: url,
                             text: tagEl.innerText
                         })
                     }
@@ -630,7 +683,6 @@ function areaSelection() {
             }
 
         });
-
 
         linksList = '';
         textList = '';
@@ -648,20 +700,19 @@ function areaSelection() {
 
     
 
-
-
     // Удалить данные
     buttonDelite.addEventListener('click', () => {
         contentTable.innerHTML = '';
         result = [];
         saveData([]);
         getElem = [];
-        navigator.clipboard.writeText('');
+        // navigator.clipboard.writeText('');
         // chrome.storage.sync.clear();
     });
 
 
 }
+
 
 
 let trTable;
@@ -699,60 +750,82 @@ function renderResult(result) {
 }
 
 
-// статус копирования
+// статус копирования (всплывающий div)
 function showCopyingStatus(uniqueText){
     let copyingPopup = document.createElement('div');
     copyingPopup.className = 'copyingPopup';
     copyingPopup.innerText = uniqueText;
     firstTabsContent.prepend(copyingPopup);
-    setTimeout(function(){
+
+    setTimeout(function (){
+        copyingPopup.style.zIndex = '1000';
         copyingPopup.style.opacity = '0';
-        copyingPopup.style.transition = 'opacity .9s ease-in';
+        copyingPopup.style.transition = 'opacity 2s ease-out';
     }, 400);
-    setTimeout( function (){
+
+    setTimeout(function (){
         copyingPopup.remove();
-    }, 1000);
+    }, 1500);
 }
 
 
+
+//Функция копирования текста
+function copyInClipboard(arrEl){
+    if (!(location.protocol === 'http:')){
+        navigator.clipboard.writeText(arrEl)
+        .then(() => {
+        })
+        .catch(err => {
+            alert('error in GetLinks', err);
+        });
+    } else {
+        
+        showCopyingStatus('Отклонено. Http-протокол небезопасен');
+        
+    }
+}
 
 
 function selectiveCopying(){
 let newResult;
 let numIndex = 0;
+getElem = [];
+
+    
+
 
 
     contentTable.addEventListener('click', (event)=>{
         
         let elemText = event.target;
-        if (elemText.classList.contains('titleUrl') || elemText.classList.contains('titleText')) {
-            // elemText.style.color='#2196f3';
-            elemText.classList.toggle('textBlueColor');
 
-            if (elemText.classList.contains('textBlueColor')){
-                getElem.push(elemText.innerText);
-                newResult = getElem;
-                showCopyingStatus('Выборочное копирование');
-            } else{
-                
-                numIndex = getElem.indexOf(elemText.innerText)
-                getElem.splice(numIndex, 1);
-                newResult = getElem;
-                showCopyingStatus('Элемент удален из списка');
+        if (!(location.protocol === 'http:')){
+            if (elemText.classList.contains('titleUrl') || elemText.classList.contains('titleText')) {
+            
+                elemText.classList.toggle('textBlueColor');
+
+                if (elemText.classList.contains('textBlueColor')){
+                    getElem.push(elemText.innerText);
+                    newResult = getElem;
+                    showCopyingStatus('Выборочное копирование');
+                } else{
+                    
+                    numIndex = getElem.indexOf(elemText.innerText)
+                    getElem.splice(numIndex, 1);
+                    newResult = getElem;
+                    showCopyingStatus('Элемент удален из списка');
+                }
+
+                newResult = getElem.join('\n');
+
+                    copyInClipboard(newResult);  
             }
 
-            newResult = getElem.join('\n');
-            
-        
-            navigator.clipboard.writeText(newResult)
-                .then(() => {
-    
-                })
-                .catch(err => {
-                    alert('error in GetLinks', err);
-                });
+        } else {
+
+            showCopyingStatus('Отклонено. Http-протокол небезопасен');
         }
-        
     });
   }
 
@@ -784,12 +857,10 @@ btnCopyLinks.addEventListener('click', () =>{
     
     if (Object.keys(titleUrl).length !== 0){
        addInnerText(titleUrl, titleText);
-       showCopyingStatus('Скопировано ссылок' + ' ' + `${totalLinks}`);
+       showCopyingStatus('Скопировано ссылок:' + ' ' + `${totalLinks}`);
     }
     
-    
 });
-
 
 
 
@@ -805,18 +876,12 @@ function addInnerText(list, list2){
         if (listEl.classList.contains('textBlueColor')){
             listEl.classList.remove('textBlueColor');
         }
-        
-        navigator.clipboard.writeText(resultList)
-            .then(() => {
-               // копирование прошло успешно
 
-            })
-            .catch(err => {
-                alert('error in GetLinks', err);
-            });
+        copyInClipboard(resultList);
+        
     })
 
-    if(list2){
+    if (list2) {
         list2.forEach(list2El =>{
             if (list2El.classList.contains('textBlueColor')){
                 list2El.classList.remove('textBlueColor');
@@ -829,11 +894,10 @@ function addInnerText(list, list2){
 
 
 
-
 // переключать темы
 switchBtn.addEventListener('click', ()=>{
     switchBtn.classList.toggle('switchOn');
-    popupLink.classList.toggle('lightTheme');
+    linkPopup.classList.toggle('lightTheme');
 })
 
 
@@ -881,6 +945,7 @@ function memoryCheckData(){
 }
 memoryCheckData();
 
+
 // флаг закрыть приложение
 function memoryCheckCloseApp(){
 
@@ -906,8 +971,8 @@ memoryCheckCloseApp();
 function onMouseMove(event) {
     let docWidth = document.documentElement.clientWidth;  // ширина документа
     let docRightWight = docWidth - event.pageX; // расстояние от правого края
-        popupLink.style.width = docRightWight + 'px'; // новая ширина
-        newPopupWidth = docRightWight;     
+    linkPopup.style.width = docRightWight + 'px'; // новая ширина
+    newPopupWidth = docRightWight;     
 }
 
 
@@ -925,7 +990,7 @@ stripPullLeft.onmousedown = function(event) {
         document.removeEventListener('mousemove', onMouseMove);
     }
     
-    popupLink.addEventListener('mouseup', ()=>{
+    linkPopup.addEventListener('mouseup', ()=>{
         chrome.storage.sync.set({widthPopup: newPopupWidth});
         
     })
@@ -949,7 +1014,7 @@ function memoryTheme(){
     chrome.storage.sync.get(['switchBtnStatus'], function(resultSwitchBtn){
         if (resultSwitchBtn.switchBtnStatus === "true"){
             switchBtn.classList.add('switchOn');
-            popupLink.classList.toggle('lightTheme');
+            linkPopup.classList.toggle('lightTheme');
 
         }
     });

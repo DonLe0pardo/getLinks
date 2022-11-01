@@ -20,7 +20,7 @@ body.myBody{
 }
 
 
-.popupLink{
+.linkPopup{
     width: 350px;
     min-width: 350px;
     min-height: 115px;
@@ -39,7 +39,7 @@ body.myBody{
 
 }
 
-.popupLink.activeShow{
+.linkPopup.activeShow{
     display: block;
 }
 
@@ -127,6 +127,10 @@ body.myBody{
     padding: 4px 0;
 }
 
+button{
+    line-height: normal !important;
+    text-transform: none !important;
+}
 
 button.btnCopyLinks,
 button.btnSave,
@@ -150,13 +154,14 @@ button.btnSave:active{
 .copyBtns button.btnCopyLinks,
 .copyBtns button.btnCopyText{
     color: white;
-    margin: 0;
+    margin: 0 !important;
     border-radius: 2px;
-    font-family: monospace;
-    padding: 4px 8px;
+    font-family: monospace !important;
+    padding: 4px 8px !important;
     border: none;
-    font-size: 13px;
+    font-size: 13px !important;
     cursor: pointer;
+    height: auto !important;
 
 }
 
@@ -175,51 +180,51 @@ button.btnSave:hover{
 
 .contentSettings{
     height: 45%;
-    padding: 10px;
+    padding: 10px !important;
     color: powderblue;
 }
 
 
 .wrapInputKeys{
-    margin: 25px 3px 35px 3px;
+    margin: 25px 3px 35px 3px !important;
 }
 
 label.labelKeys{
     display: block;
-    margin: 0 0 13px 0;
-    padding: 0;
-    font-size: 14px;
+    margin: 0 0 13px 0 !important;
+    padding: 0 !important;
+    font-size: 14px !important;
 }
 label.labelAddLink,
 label.labelSaveData,
 label.labelAppClose{
-    display: inline-block;
-    font-weight: 600;
-    margin: 0 0 5px 0;
-    padding: 0;
-    font-size: 13px;
+    display: inline-block !important;
+    font-weight: 600 !important;
+    margin: 0 0 5px 0 !important;
+    padding: 0 !important;
+    font-size: 13px !important;
 }
 
 input.inputKeys{
     width: 80%;
-    height: 25px;
-    font-size: 20px;
-    margin: 0;
-    padding: 0;
-    font-family: monospace;
+    height: 25px !important;
+    font-size: 20px !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    font-family: monospace !important;
     box-sizing: border-box;
 }
 
 .garbage{
     display: flex;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 20px !important;
 }
 
 img.garbageImg{
-    width: 40px;
-    height: 40px;
-    padding: 3px;
+    width: 40px !important;
+    height: 40px !important;
+    padding: 3px !important;
     background: #00BFFF;
     border-radius: 50%;
     box-sizing: border-box;
@@ -227,13 +232,13 @@ img.garbageImg{
 
 button.buttonDelite,
 button.btnOpen{
-    height: 40px;
-    margin: 10px 0 10px 5px;
-    background: none;
+    height: 40px !important;
+    margin: 10px 0 10px 5px !important;
+    background: none !important;
     cursor: pointer;
     border: 1px solid #91C9FF;
     color: white;
-    font-size: 14px;
+    font-size: 14px !important;
     letter-spacing: 3px;
 }
 button.btnOpen{
@@ -241,7 +246,7 @@ button.btnOpen{
 }
 
 button.buttonDelite{
-    padding: 1px 6px;
+    padding: 1px 6px !important;
 }
 
 
@@ -286,6 +291,7 @@ table.contentTable{
     margin-bottom: 40px;
     font-family: monospace;
     font-size: 16px;
+    overflow: visible !important;
 }
 
 tr.trTable{
@@ -293,9 +299,9 @@ tr.trTable{
     cursor: copy;
     min-width: 332px;
     width: 100%;
-    margin: 0;
-    border: none;
-    padding:0;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
 }
 
 
@@ -383,57 +389,57 @@ td.tdTable.textBlueColor{
 
 
 /* стили светлой темы */
-.popupLink.lightTheme{
+.linkPopup.lightTheme{
     background: azure;
     border: 2px solid #708090;
 }
-.popupLink.lightTheme .wrapContentTable{
+.linkPopup.lightTheme .wrapContentTable{
     background: linear-gradient(azure, #B0C4DE);
 }
-.popupLink.lightTheme table.contentTable{
+.linkPopup.lightTheme table.contentTable{
     color: darkslategrey;
 }
-.popupLink.lightTheme .wrapSettings{
+.linkPopup.lightTheme .wrapSettings{
     background: linear-gradient(azure, #B0C4DE);
 }
-.popupLink.lightTheme .contentSettings{
+.linkPopup.lightTheme .contentSettings{
     color: darkslategrey;
 }
 
-.popupLink.lightTheme .tabsHead__title{
+.linkPopup.lightTheme .tabsHead__title{
     box-shadow: none;
     background: lightblue;
     border-radius: 12px;
     color: rgb(255, 255, 255);
 }
-.popupLink.lightTheme .tabsHead__title.is-active {
+.linkPopup.lightTheme .tabsHead__title.is-active {
     background: lightslategrey;
 }
 
-.popupLink.lightTheme button.btnCopyLinks,
-.popupLink.lightTheme button.btnCopyText,
-.popupLink.lightTheme button.btnSave{
+.linkPopup.lightTheme button.btnCopyLinks,
+.linkPopup.lightTheme button.btnCopyText,
+.linkPopup.lightTheme button.btnSave{
     box-shadow: none;
     border-radius: 9px;
     background: aliceblue;
     color: lightslategrey;
 }
-.popupLink.lightTheme button.btnCopyLinks:hover,
-.popupLink.lightTheme button.btnCopyText:hover,
-.popupLink.lightTheme button.btnSave:hover{
+.linkPopup.lightTheme button.btnCopyLinks:hover,
+.linkPopup.lightTheme button.btnCopyText:hover,
+.linkPopup.lightTheme button.btnSave:hover{
     color: rgb(71, 69, 69);
 }
-.popupLink.lightTheme button.btnCopyLinks:active,
-.popupLink.lightTheme button.btnCopyText:active,
-.popupLink.lightTheme button.btnSave:active{
+.linkPopup.lightTheme button.btnCopyLinks:active,
+.linkPopup.lightTheme button.btnCopyText:active,
+.linkPopup.lightTheme button.btnSave:active{
     box-shadow: 0 0 10px whitesmoke;
 }
 
-.popupLink.lightTheme .copyBtns{
+.linkPopup.lightTheme .copyBtns{
     background: transparent;
 }
 
-.popupLink.lightTheme button.buttonDelite{
+.linkPopup.lightTheme button.buttonDelite{
     border-radius: 8px;
     border-color: slategray;
     color: rgb(71, 69, 69);
@@ -444,19 +450,19 @@ td.tdTable.textBlueColor{
     -webkit-transition: background 300ms ease-in-out;
     transition: background 300ms ease-in-out;
 }
-.popupLink.lightTheme button.buttonDelite:hover{
+.linkPopup.lightTheme button.buttonDelite:hover{
     background-position: 0;
     color: #fff;
 }
-.popupLink.lightTheme button.buttonDelite:active{
+.linkPopup.lightTheme button.buttonDelite:active{
     padding: 0;
 }
-.popupLink.lightTheme img.garbageImg{
+.linkPopup.lightTheme img.garbageImg{
     background: lightblue;
     border: 1px solid rgb(71, 69, 69);
 }
 
-.popupLink.lightTheme .copyingPopup{
+.linkPopup.lightTheme .copyingPopup{
     background: powderblue;
     color: darkslategrey;
 }
@@ -503,12 +509,19 @@ td.tdTable.textBlueColor{
 }
 
 
-.popupLink .closeAppBtn{
-    position: absolute;
-    font-size: 40px;
-    left: -37px;
+.linkPopup .closeAppBtn{
+    position: absolute !important;
+    font-size: 40px !important;
+    left: -37px !important;
     cursor: pointer;
-    z-index: 3;
-    top: -8px;
+    z-index: 3 !important;
+    top: -8px !important;
+    font-family: monospace !important;
+    line-height: normal !important;
+    color: black;
+    
 }
 
+.linkPopup .closeAppBtn:hover{
+    color: rgb(33, 150, 243);
+}
