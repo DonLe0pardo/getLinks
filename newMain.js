@@ -760,12 +760,12 @@ function showCopyingStatus(uniqueText){
     setTimeout(function (){
         copyingPopup.style.zIndex = '1000';
         copyingPopup.style.opacity = '0';
-        copyingPopup.style.transition = 'opacity 2s ease-out';
-    }, 400);
+        copyingPopup.style.transition = 'opacity 1s ease-out';
+    }, 1000);
 
     setTimeout(function (){
         copyingPopup.remove();
-    }, 1500);
+    }, 1300);
 }
 
 

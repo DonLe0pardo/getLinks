@@ -157,7 +157,7 @@ button.btnSave:active{
     margin: 0 !important;
     border-radius: 2px;
     font-family: monospace !important;
-    padding: 4px 8px !important;
+    padding: 4px 8px;
     border: none;
     font-size: 13px !important;
     cursor: pointer;
@@ -234,7 +234,7 @@ button.buttonDelite,
 button.btnOpen{
     height: 40px !important;
     margin: 10px 0 10px 5px !important;
-    background: none !important;
+    background: none;
     cursor: pointer;
     border: 1px solid #91C9FF;
     color: white;
@@ -246,7 +246,7 @@ button.btnOpen{
 }
 
 button.buttonDelite{
-    padding: 1px 6px !important;
+    padding: 1px 6px;
 }
 
 
@@ -465,7 +465,10 @@ td.tdTable.textBlueColor{
 .linkPopup.lightTheme .copyingPopup{
     background: powderblue;
     color: darkslategrey;
+    font-family: monospace;
 }
+
+
 
 
 /* попап */
